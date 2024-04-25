@@ -14,7 +14,7 @@
 
 def dict_travel(nested_dicts, new_str=''):
     for k, v in sorted(nested_dicts.items()):
-        if not isinstance(v, dict):
-            print(f'{new_str}{k}: {v}')
         if isinstance(v, dict):
             dict_travel(v, new_str + f'{k}.')
+        else:
+            print(f'{new_str}{k}: {v}')
