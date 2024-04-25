@@ -12,3 +12,9 @@
 # {'b.c': 1, 'b': {'c': 30, 'a': 10, 'b': 20}}
 # Примечание 3. В тестирующую систему сдайте программу, содержащую только необходимую функцию dict_travel(), но не код, вызывающий ее.
 
+def dict_travel(nested_dicts, new_str=''):
+    for k, v in sorted(nested_dicts.items()):
+        if not isinstance(v, dict):
+            print(f'{new_str}{k}: {v}')
+        if isinstance(v, dict):
+            dict_travel(v, new_str + f'{k}.')
