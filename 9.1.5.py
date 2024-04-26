@@ -6,4 +6,4 @@
 # Примечание 2. В тестирующую систему сдайте программу, содержащую только необходимую функцию is_greater(), но не код, вызывающий ее.
 
 def is_greater(lists, number):
-    return any(True if sum(i) > number else False for i in lists)
+    return any(sum(i) > number for i in lists)
