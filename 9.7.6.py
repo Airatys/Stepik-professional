@@ -8,20 +8,10 @@
 
 def takes_positive(func):
     def wrapper(*args, **kwargs):
-        try:
-            for i in args:
-                if i <= 0 and isinstance(i, int):
-                    raise ValueError
-                if i < 0 or not isinstance(i, int):
-                    raise TypeError
-            for i in kwargs.values():
-                if i < 0 and not isinstance(i, int):
-                    raise TypeError
-                if i <= 0 and isinstance(i, int):
-                    raise ValueError
-            return func(*args, **kwargs)
-        except TypeError:
-            raise
-        except ValueError:
-            raise
+        for x in *args, *kwargs.values():
+            if not isinstance(x, int):
+                raise TypeError
+            if x <= 0:
+                raise ValueError
+        return func(*args, **kwargs)
     return wrapper
