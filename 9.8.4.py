@@ -1,31 +1,18 @@
+# Реализуйте декоратор prefix, который принимает два аргумента в следующем порядке:
+#     string — произвольная строка
+#     to_the_end — булево значение, по умолчанию равное False
+# Декоратор должен добавлять строку string к возвращаемому значению декорируемой функции. Если to_the_end имеет значение True, строка string добавляется в конец, если False — в начало.
+# Также декоратор должен сохранять имя и строку документации декорируемой функции.
+# Примечание 1. Гарантируется, что возвращаемым значением декорируемой функции является объект типа str.
+# Примечание 2. Не забывайте про то, что декоратор не должен поглощать возвращаемое значение декорируемой функции, а также должен уметь декорировать функции с произвольным количеством позиционных и именованных аргументов.
+# Примечание 3. В тестирующую систему сдайте программу, содержащую только необходимый декоратор prefix, но не код, вызывающий его.
+
 import functools
-import time
 
-def repeater(repeat=1):
-    def decorator(func):
+def prefix(string: str, to_the_end: bool = False) -> str:
+    def prefix_decorator(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            for i in range(1, repeat + 1):
-                print(f'{i}-й запуск функции.')
-                value = func(*args, **kwargs)
-            return value
-        return wrapper
-    return decorator
-
-def delayed(delay=2):
-    def decorator(func):
-        @functools.wraps(func)
-        def wrapper(*args, **kwargs):
-            print(f'Спим {delay} сек.')
-            time.sleep(delay)
-            value = func(*args, **kwargs)
-            return value
-        return wrapper
-    return decorator
-
-@repeater(repeat=5)
-@delayed(delay=1)
-def monitor(url):
-    print(f'Проверка {url} на доступность.')
-    
-monitor('https://stepik.org/')
+            return func(*args, **kwargs ) + string if to_the_end else string + func(*args, **kwargs )
+        return wrapper    
+    return prefix_decorator
