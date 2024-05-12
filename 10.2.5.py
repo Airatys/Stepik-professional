@@ -18,10 +18,4 @@ def get_min_max(iterable):
             return min(iterable), max(iterable)
         except:
             return None
- 
-        
 
-    
-data = iter(['bbb'])
-
-print(get_min_max(data))
