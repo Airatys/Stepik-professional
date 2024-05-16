@@ -4,11 +4,8 @@
 # 1,2,2,3,3,3,4,4,4,4,..Примечание 1. В тестирующую систему сдайте программу, содержащую только необходимую генераторную функцию simple_sequence(), но не код, вызывающий ее.
 
 def simple_sequence():
-    value = 1
-    counter = 0
+    num = 1
     while True:
-        yield value
-        counter += 1
-        if value == counter:
-            value += 1
-            counter = 0
+        for _ in range(num):
+            yield num
+        num += 1
