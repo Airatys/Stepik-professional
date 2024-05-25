@@ -12,7 +12,7 @@ def pairwise(iterable):
         return []
     iterator = iter(iterable)
     f1 = next(iterator)
-    while f1 != None:
+    while not f1 is None:
         try:
             f2 = next(iterator, None)
             yield (f1, f2)
