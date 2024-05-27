@@ -13,3 +13,9 @@ def first_largest(iterable, number):
         return next(it.dropwhile(lambda x: x[1] < number, enumerate(iterable)), -1)[0]
     except:
         return -1
+
+# через compress 
+
+from itertools import compress, count
+
+first_largest = lambda it, n: next(compress(count(), (i>n for i in it)), -1)
