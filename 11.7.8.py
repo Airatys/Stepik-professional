@@ -11,16 +11,14 @@
 # <тег>: <атрибут>, <атрибут>, ...
 # Теги, а также атрибуты тегов, должны быть расположены в лексикографическом порядке.
 
-from bs4 import BeautifulSoup
-import sys
 import re
 
-mydict = {}
-regex_1 = r'<(\w+ \w+)=\"|(\w+)=\"'   # [a-z\d]+   атрибуты:  [a-z-]+
-regex_2 = r'<([a-z\d]+)\S?([a-z-])?>'
-for i in sys.stdin:
-    pattern = re.findall(regex_1, i, re.IGNORECASE)
-    print(pattern)
-    # mydict[pattern[0][0]] = mydict.get(pattern[0][0], )
+res = {}
+for line in open(0):
+    for tag, params in re.findall(r'<(\w+)(.*?)>', line):
+        res.setdefault(tag, set()).update(re.findall(r'([\w-]+)=', params))
+
+for key in sorted(res):
+    print(f'{key}: {", ".join(sorted(res[key]))}')
         
 
